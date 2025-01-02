@@ -18,8 +18,8 @@ public class UserController {
         userService.addUser(user);
     }
 
-    @GetMapping("/user/find")
-    public User findUser(@RequestParam Long id){
+    @GetMapping("/user/{id}")
+    public User findUser(@PathVariable Long id){
 
         return userService.findUser(id);
     }
@@ -28,5 +28,10 @@ public class UserController {
     public List<User> findAllUser(){
 
         return userService.getAllUsers();
+    }
+
+    @DeleteMapping("/user/{id}")
+    public void deleteUser(@PathVariable Long id){
+        userService.deleteUser(id);
     }
 }

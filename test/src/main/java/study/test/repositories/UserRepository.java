@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import study.test.domain.User;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,5 +28,16 @@ public class UserRepository {
     public List<User> findAllUsers(){
 
         return new ArrayList<>(userList);
+    }
+
+    public void deleteUserById(Long id){
+        Iterator<User> iterator = userList.iterator();
+        while (iterator.hasNext()) {
+            User user = iterator.next();
+            if (user.getId().equals(id)) {
+                iterator.remove();
+                break;
+            }
+        }
     }
 }
