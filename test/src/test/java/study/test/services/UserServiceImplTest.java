@@ -3,7 +3,7 @@ package study.test.services;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import study.test.domain.User;
-import study.test.repositories.UserRepository;
+import study.test.repositories.UserRepositoryImpl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -14,12 +14,12 @@ import static org.mockito.Mockito.*;
 
 class UserServiceImplTest {
 
-    private UserRepository userRepository;
+    private UserRepositoryImpl userRepository;
     private UserServiceImpl userService;
 
     @BeforeEach
     void setUp() {
-        userRepository = mock(UserRepository.class);
+        userRepository = mock(UserRepositoryImpl.class);
         userService = new UserServiceImpl(userRepository);
     }
 

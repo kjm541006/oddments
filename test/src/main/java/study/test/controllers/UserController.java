@@ -6,6 +6,7 @@ import study.test.domain.User;
 import study.test.services.UserServiceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,7 +20,7 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public User findUser(@PathVariable Long id){
+    public Optional<User> findUser(@PathVariable Long id){
 
         return userService.findUser(id);
     }
