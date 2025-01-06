@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,6 +20,9 @@ public class User {
     private String username;
     private String name;
     private BigDecimal amount;
+
+    @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Product> products;
 
 //    public User(Long id, String username, String name, BigDecimal amount) {
 //        this.id = id;

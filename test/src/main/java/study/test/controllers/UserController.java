@@ -2,7 +2,6 @@ package study.test.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import study.test.DTO.UserDTO;
 import study.test.domain.User;
 import study.test.services.UserServiceImpl;
 
