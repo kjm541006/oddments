@@ -1,5 +1,6 @@
 package study.test.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,8 +53,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findUser(Long id) {
-        return userRepository.findById(id);
+    public User findUser(Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
 
     @Override

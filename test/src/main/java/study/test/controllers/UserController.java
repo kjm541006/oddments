@@ -2,6 +2,7 @@ package study.test.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import study.test.DTO.UserDTO;
 import study.test.domain.User;
 import study.test.services.UserServiceImpl;
 
@@ -15,12 +16,16 @@ public class UserController {
     private final UserServiceImpl userService;
 
     @PostMapping("/user/add")
-    public void addUser(@RequestBody User user){
+    public void addUser(@RequestBody UserDTO userDTO){
+        User user = new User();
+        user.setUsername(userDTO.getUsername());
+        user.setName(userDTO.getName());
+        user.setAmount(userDTO.getAmount());
         userService.addUser(user);
     }
 
     @GetMapping("/user/{id}")
-    public Optional<User> findUser(@PathVariable Long id){
+    public User findUser(@PathVariable Long id){
 
         return userService.findUser(id);
     }
