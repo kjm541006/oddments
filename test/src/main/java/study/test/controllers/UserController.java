@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import study.test.DTO.UserDTO;
 import study.test.domain.User;
+import study.test.services.UserService;
 import study.test.services.UserServiceImpl;
 
 import java.util.List;
@@ -13,15 +14,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
     @PostMapping("/user/add")
     public void addUser(@RequestBody UserDTO userDTO){
-        User user = new User();
-        user.setUsername(userDTO.getUsername());
-        user.setName(userDTO.getName());
-        user.setAmount(userDTO.getAmount());
-        userService.addUser(user);
+        userService.addUser(userDTO);
     }
 
     @GetMapping("/user/{id}")
@@ -42,7 +39,7 @@ public class UserController {
     }
 
     @PutMapping("/user/{id}")
-    public void updateUser(@PathVariable Long id, @RequestBody User updateUserParam){
+    public void updateUser(@PathVariable Long id, @RequestBody UserDTO updateUserParam){
         userService.updateUser(id, updateUserParam);
     }
 }

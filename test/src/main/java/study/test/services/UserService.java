@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface UserService {
 
-    void addUser(User user);
+    void addUser(UserDTO userDTO);
 
     User findUser(Long id);
 
@@ -17,7 +17,7 @@ public interface UserService {
 
     void deleteUser(Long id);
 
-    void updateUser(Long id, User updateUserParam);
+    void updateUser(Long id, UserDTO updateUserParam);
 
     boolean transferBalance(Long senderId, Long receiverId, BigDecimal amount);
 }

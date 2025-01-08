@@ -1,5 +1,6 @@
 package study.test.services;
 
+import study.test.DTO.ProductDTO;
 import study.test.domain.Product;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface ProductService {
 
     Optional<Product> getProductById(Long id);
 
-    void saveProduct(Product product);
+    void saveProduct(ProductDTO productDTO);
 
     void deleteProduct(Long id);
 }

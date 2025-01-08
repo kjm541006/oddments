@@ -26,5 +26,3 @@ public class Product {
     @JsonBackReference
     private User seller;
 }
-
-// DTO 추가하기

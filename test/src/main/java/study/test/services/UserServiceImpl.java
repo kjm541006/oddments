@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 //import study.test.DTO.UserDTO;
+import study.test.DTO.UserDTO;
 import study.test.domain.User;
 import study.test.repositories.UserRepository;
 //import study.test.repositories.UserRepositoryImpl;
@@ -17,38 +18,14 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    //    private final UserRepositoryImpl userRepositoryImpl;
     private final UserRepository userRepository;
 
-//    @Override
-//    public void addUser(User user) {
-//        userRepositoryImpl.addUser(user);
-//    }
-//
-//    @Override
-//    public User findUser(Long id) {
-//
-//        return userRepositoryImpl.findUserById(id);
-//    }
-//
-//    @Override
-//    public List<User> getAllUsers() {
-//        return userRepositoryImpl.findAllUsers();
-//    }
-//
-//    @Override
-//    public void deleteUser(Long id) {
-//        userRepositoryImpl.deleteUserById(id);
-//    }
-//
-//    @Override
-//    public void updateUser(Long id, User updateUserParam) {
-//        userRepositoryImpl.updateUserById(id, updateUserParam);
-//    }
-
-
     @Override
-    public void addUser(User user) {
+    public void addUser(UserDTO userDTO) {
+        User user = new User();
+        user.setUsername(userDTO.getUsername());
+        user.setName(userDTO.getName());
+        user.setAmount(userDTO.getAmount());
         userRepository.save(user);
     }
 
@@ -68,15 +45,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(Long id, User updateUserParam) {
-        Optional<User> foundUser = userRepository.findById(id);
-        if (foundUser.isPresent()) {
-            User user = foundUser.get();
-            user.setUsername(updateUserParam.getUsername());
-            user.setName(updateUserParam.getName());
-            user.setAmount(updateUserParam.getAmount());
-            userRepository.save(user);
-        }
+    public void updateUser(Long id, UserDTO updateUserParam) {
+        User user = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        user.setUsername(updateUserParam.getUsername());
+        user.setName(updateUserParam.getName());
+        user.setAmount(updateUserParam.getAmount());
+        userRepository.save(user);
     }
 
     @Override
