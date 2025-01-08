@@ -1,5 +1,6 @@
 package study.test.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import study.test.DTO.ProductDTO;
@@ -24,9 +25,18 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Optional<Product> getProductById(Long id) {
+    public ProductDTO getProductById(Long id) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Product Not Found"));
 
-        return productRepository.findById(id);
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setName(product.getName());
+        productDTO.setDescription(product.getDescription());
+        productDTO.setPrice(product.getPrice());
+        productDTO.setStock(product.getStock());
+        productDTO.setUserId(product.getSeller().getId());
+
+
+        return productDTO;
     }
 
     @Override
