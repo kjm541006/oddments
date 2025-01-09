@@ -5,10 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import study.test.DTO.UserDTO;
 import study.test.domain.User;
 import study.test.services.UserService;
-import study.test.services.UserServiceImpl;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor

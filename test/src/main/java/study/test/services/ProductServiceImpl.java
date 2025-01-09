@@ -9,7 +9,6 @@ import study.test.domain.User;
 import study.test.repositories.ProductRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -34,7 +33,6 @@ public class ProductServiceImpl implements ProductService{
         productDTO.setPrice(product.getPrice());
         productDTO.setStock(product.getStock());
         productDTO.setUserId(product.getSeller().getId());
-
 
         return productDTO;
     }
