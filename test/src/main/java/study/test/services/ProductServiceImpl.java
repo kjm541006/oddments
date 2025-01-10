@@ -9,9 +9,7 @@ import study.test.domain.Product;
 import study.test.domain.User;
 import study.test.repositories.ProductRepository;
 
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -63,7 +61,6 @@ public class ProductServiceImpl implements ProductService{
     @Transactional
     public void updateProduct(Long id, ProductDTO productDTO) {
         Product product = productRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Product Not Found"));
-//        product.setId(id);
         product.setName(productDTO.getName());
         product.setDescription(productDTO.getDescription());
         product.setPrice(productDTO.getPrice());
