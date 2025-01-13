@@ -1,13 +1,12 @@
 package study.test.services;
 
 import study.test.DTO.ProductDTO;
-import study.test.domain.Product;
 
 import java.util.List;
 
 public interface ProductService {
 
-    List<Product> getAllProducts();
+    List<ProductDTO> getAllProducts();
 
     ProductDTO getProductById(Long id);
 

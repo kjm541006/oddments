@@ -3,7 +3,6 @@ package study.test.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import study.test.DTO.ProductDTO;
-import study.test.domain.Product;
 import study.test.services.ProductService;
 
 import java.util.List;
@@ -15,7 +14,7 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("/products")
-    public List<Product> getAllProducts(){
+    public List<ProductDTO> getAllProducts(){
 
         return productService.getAllProducts();
     }

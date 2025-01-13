@@ -21,8 +21,8 @@ public class Product {
     private BigDecimal price;
     private int stock;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     @JsonBackReference
-    private User seller;
+    private User user;
 }

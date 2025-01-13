@@ -10,18 +10,31 @@ import study.test.domain.User;
 import study.test.repositories.ProductRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final UserService userService;
 
     @Override
-    public List<Product> getAllProducts() {
+    public List<ProductDTO> getAllProducts() {
 
-        return productRepository.findAll();
+        List<Product> products = productRepository.findAll();
+        List<ProductDTO> productDTOs = products.stream().map(product -> {
+            ProductDTO productDTO = new ProductDTO();
+            productDTO.setName(product.getName());
+            productDTO.setDescription(product.getDescription());
+            productDTO.setPrice(product.getPrice());
+            productDTO.setStock(product.getStock());
+            productDTO.setUserId(product.getUser().getId());
+
+            return productDTO;
+        }).collect(Collectors.toList());
+
+        return productDTOs;
     }
 
     @Override
@@ -33,7 +46,7 @@ public class ProductServiceImpl implements ProductService{
         productDTO.setDescription(product.getDescription());
         productDTO.setPrice(product.getPrice());
         productDTO.setStock(product.getStock());
-        productDTO.setUserId(product.getSeller().getId());
+        productDTO.setUserId(product.getUser().getId());
 
         return productDTO;
     }
@@ -47,7 +60,7 @@ public class ProductServiceImpl implements ProductService{
         product.setStock(productDTO.getStock());
 
         User user = userService.findUser(productDTO.getUserId());
-        product.setSeller(user);
+        product.setUser(user);
 
         productRepository.save(product);
     }
@@ -67,7 +80,7 @@ public class ProductServiceImpl implements ProductService{
         product.setStock(productDTO.getStock());
 
         User user = userService.findUser(productDTO.getUserId());
-        product.setSeller(user);
+        product.setUser(user);
 
         productRepository.save(product);
     }
