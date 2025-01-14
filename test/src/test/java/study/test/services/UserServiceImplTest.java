@@ -1,22 +1,27 @@
-//package study.test.services;
-//
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//import study.test.domain.User;
-//import study.test.repositories.UserRepositoryImpl;
-//
-//import java.math.BigDecimal;
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//import static org.junit.jupiter.api.Assertions.*;
-//import static org.mockito.Mockito.*;
-//
-//class UserServiceImplTest {
-//
-//    private UserRepositoryImpl userRepository;
-//    private UserServiceImpl userService;
-//
+package study.test.services;
+
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import study.test.DTO.UserDTO;
+import study.test.domain.User;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+@SpringBootTest
+class UserServiceImplTest {
+
+    @Autowired
+    private UserService userService;
+
 //    @BeforeEach
 //    void setUp() {
 //        userRepository = mock(UserRepositoryImpl.class);
@@ -62,4 +67,24 @@
 //        assertEquals("johnDoe", allUsers.get(0).getUsername());
 //        assertEquals("janeDoe", allUsers.get(1).getUsername());
 //    }
-//}
+
+    @Test
+    @DisplayName("멤버 생성 테스트")
+    void createMember(){
+        // when
+        User user = User.builder()
+                .username("testUsername")
+                .name("testName")
+                .amount(BigDecimal.valueOf(100))
+                .build();
+
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUsername(user.getUsername());
+        userDTO.setName(user.getName());
+        userDTO.setAmount(user.getAmount());
+
+        userService.addUser(userDTO);
+
+        Assertions.assertThat(user.getName()).isEqualTo("testName");
+    }
+}

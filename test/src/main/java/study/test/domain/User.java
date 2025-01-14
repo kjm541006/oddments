@@ -2,6 +2,7 @@ package study.test.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,5 +26,16 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Product> products;
+
+    public User(){
+
+    }
+
+    @Builder
+    public User(String username, String name, BigDecimal amount){
+        this.username = username;
+        this.name = name;
+        this.amount = amount;
+    }
 
 }
